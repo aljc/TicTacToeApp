@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XO.h"
 
 @interface ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *gridView;
 @property NSMutableArray *imageArray;
+@property (weak, nonatomic) IBOutlet XO *x;
+@property (weak, nonatomic) IBOutlet XO *o;
+- (IBAction)handlePan:(UIPanGestureRecognizer *)sender;
 
 @end
 

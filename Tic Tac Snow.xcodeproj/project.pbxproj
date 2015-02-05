@@ -15,6 +15,8 @@
 		318C4BA41A82F6300062B40E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318C4BA21A82F6300062B40E /* LaunchScreen.xib */; };
 		318C4BB01A82F6300062B40E /* Tic_Tac_SnowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318C4BAF1A82F6300062B40E /* Tic_Tac_SnowTests.m */; };
 		318C4BBB1A8316D10062B40E /* XO.m in Sources */ = {isa = PBXBuildFile; fileRef = 318C4BBA1A8316D10062B40E /* XO.m */; };
+		31B49AED1A83429200F9803F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEC1A83429200F9803F /* DetailViewController.m */; };
+		31B49AF01A83453200F9803F /* PresentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEF1A83453200F9803F /* PresentSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		318C4BAF1A82F6300062B40E /* Tic_Tac_SnowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tic_Tac_SnowTests.m; sourceTree = "<group>"; };
 		318C4BB91A8316D10062B40E /* XO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XO.h; sourceTree = "<group>"; };
 		318C4BBA1A8316D10062B40E /* XO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XO.m; sourceTree = "<group>"; };
+		31B49AEB1A83429200F9803F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		31B49AEC1A83429200F9803F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		31B49AEE1A83453200F9803F /* PresentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentSegue.h; sourceTree = "<group>"; };
+		31B49AEF1A83453200F9803F /* PresentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,10 @@
 				318C4BB91A8316D10062B40E /* XO.h */,
 				318C4BBA1A8316D10062B40E /* XO.m */,
 				318C4B9D1A82F6300062B40E /* Main.storyboard */,
+				31B49AEB1A83429200F9803F /* DetailViewController.h */,
+				31B49AEC1A83429200F9803F /* DetailViewController.m */,
+				31B49AEE1A83453200F9803F /* PresentSegue.h */,
+				31B49AEF1A83453200F9803F /* PresentSegue.m */,
 				318C4BA01A82F6300062B40E /* Images.xcassets */,
 				318C4BA21A82F6300062B40E /* LaunchScreen.xib */,
 				318C4B931A82F62F0062B40E /* Supporting Files */,
@@ -224,8 +234,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31B49AED1A83429200F9803F /* DetailViewController.m in Sources */,
 				318C4B9C1A82F6300062B40E /* ViewController.m in Sources */,
 				318C4B991A82F6300062B40E /* AppDelegate.m in Sources */,
+				31B49AF01A83453200F9803F /* PresentSegue.m in Sources */,
 				318C4BBB1A8316D10062B40E /* XO.m in Sources */,
 				318C4B961A82F62F0062B40E /* main.m in Sources */,
 			);
@@ -418,6 +430,7 @@
 				318C4BB51A82F6300062B40E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		318C4BB61A82F6300062B40E /* Build configuration list for PBXNativeTarget "Tic Tac SnowTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +439,7 @@
 				318C4BB81A82F6300062B40E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
