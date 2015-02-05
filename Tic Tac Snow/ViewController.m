@@ -10,6 +10,8 @@
 
 @interface ViewController ()
 
+
+
 @end
 
 @implementation ViewController
@@ -17,6 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.gridView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.gridView setImage:[UIImage imageNamed:@"grid"]];
+    
+    self.imageArray = [[NSMutableArray alloc] initWithCapacity:9];
+    
+    //build array of imageviews for the grid spaces
+    int i;
+    for (i=0; i < 9; i++) {
+        UIView *space = [[UIView alloc] init];
+        [self.imageArray addObject:space];
+    }
+    
+    UIImageView imageView = [[UIImageView alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
