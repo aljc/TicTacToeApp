@@ -283,9 +283,9 @@
         
         if (val == 1 || val == 2) {
             /* We will make a DEEP COPY of the UIImageView containing the X or O in this space.  We will animate this COPY back to the initial piece position,
-            and then remove the copy from the superview.  As for the actual UIImageView contained in the storyboard and imageArray itself,
-            it stays EXACTLY where it is - we will simply clear its image.  The reason is, if you animated THAT image view away, then you would no longer
-             have access to that image view and its position in future games. */
+            instead of the image view itself, and then remove the copy from the superview.  As for the actual UIImageView contained in the storyboard and imageArray itself,
+            it stays EXACTLY where it is - we will simply clear its image.  The reason being, if you animated the original image view away, then you would no longer
+             have access to that image view and its position for future games. */
             
             //make deep copy of image view
             UIImageView *copy = [[UIImageView alloc] initWithFrame:CGRectMake(u.frame.origin.x, u.frame.origin.y, 100, 100)];
