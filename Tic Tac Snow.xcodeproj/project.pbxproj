@@ -15,6 +15,9 @@
 		318C4BA41A82F6300062B40E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318C4BA21A82F6300062B40E /* LaunchScreen.xib */; };
 		318C4BB01A82F6300062B40E /* Tic_Tac_SnowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318C4BAF1A82F6300062B40E /* Tic_Tac_SnowTests.m */; };
 		318C4BBB1A8316D10062B40E /* XO.m in Sources */ = {isa = PBXBuildFile; fileRef = 318C4BBA1A8316D10062B40E /* XO.m */; };
+		319A51571A8817CE00CF4F77 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319A51551A88177F00CF4F77 /* AudioToolbox.framework */; };
+		319A51591A88189600CF4F77 /* flagscore.wav in Resources */ = {isa = PBXBuildFile; fileRef = 319A51581A88189600CF4F77 /* flagscore.wav */; };
+		319A515B1A8828CF00CF4F77 /* buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 319A515A1A8828CF00CF4F77 /* buzzer.caf */; };
 		31B49AED1A83429200F9803F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEC1A83429200F9803F /* DetailViewController.m */; };
 		31B49AF01A83453200F9803F /* PresentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEF1A83453200F9803F /* PresentSegue.m */; };
 /* End PBXBuildFile section */
@@ -45,6 +48,9 @@
 		318C4BAF1A82F6300062B40E /* Tic_Tac_SnowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tic_Tac_SnowTests.m; sourceTree = "<group>"; };
 		318C4BB91A8316D10062B40E /* XO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XO.h; sourceTree = "<group>"; };
 		318C4BBA1A8316D10062B40E /* XO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XO.m; sourceTree = "<group>"; };
+		319A51551A88177F00CF4F77 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		319A51581A88189600CF4F77 /* flagscore.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flagscore.wav; sourceTree = "<group>"; };
+		319A515A1A8828CF00CF4F77 /* buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = buzzer.caf; sourceTree = "<group>"; };
 		31B49AEB1A83429200F9803F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		31B49AEC1A83429200F9803F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		31B49AEE1A83453200F9803F /* PresentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentSegue.h; sourceTree = "<group>"; };
@@ -56,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				319A51571A8817CE00CF4F77 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +79,7 @@
 		318C4B871A82F62F0062B40E = {
 			isa = PBXGroup;
 			children = (
+				319A51551A88177F00CF4F77 /* AudioToolbox.framework */,
 				318C4B921A82F62F0062B40E /* Tic Tac Snow */,
 				318C4BAC1A82F6300062B40E /* Tic Tac SnowTests */,
 				318C4B911A82F62F0062B40E /* Products */,
@@ -111,6 +119,8 @@
 		318C4B931A82F62F0062B40E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				319A515A1A8828CF00CF4F77 /* buzzer.caf */,
+				319A51581A88189600CF4F77 /* flagscore.wav */,
 				318C4B941A82F62F0062B40E /* Info.plist */,
 				318C4B951A82F62F0062B40E /* main.m */,
 			);
@@ -215,8 +225,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				318C4B9F1A82F6300062B40E /* Main.storyboard in Resources */,
+				319A515B1A8828CF00CF4F77 /* buzzer.caf in Resources */,
 				318C4BA41A82F6300062B40E /* LaunchScreen.xib in Resources */,
 				318C4BA11A82F6300062B40E /* Images.xcassets in Resources */,
+				319A51591A88189600CF4F77 /* flagscore.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

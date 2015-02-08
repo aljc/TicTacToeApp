@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #define MIN_INTERSECTION_AREA 3000
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface ViewController ()
 
@@ -87,11 +88,27 @@
 
         
         //if the area of intersection is above a certain size and space is not occupied
-        if ((overlap > MIN_INTERSECTION_AREA) && ([[_placements objectAtIndex:i] intValue]==0)) {
-            //touching!
-            //**YOU ACTUALLY HAVE TO USE THE RIGHT IDENTIFIER OR ELSE IT MESSES WITH THE NUMERICAL OUTPUT!!
-            NSLog(@"TOUCHING! intersection area: %f, intersection height: %f, width: %f", intersection.size.height * intersection.size.width, intersection.size.height, intersection.size.width);
+        if ((overlap > MIN_INTERSECTION_AREA)) {
             
+            //if space is already occupied, play buzzer sound
+            if ([[_placements objectAtIndex:i] intValue]!=0) {
+                //create sound to play when pan begins
+                NSString *buzzerPath = [[NSBundle mainBundle] pathForResource:@"buzzer" ofType:@"caf"];
+                NSURL *buzzerURL = [NSURL fileURLWithPath:buzzerPath];
+                SystemSoundID soundID;
+                AudioServicesCreateSystemSoundID((__bridge CFURLRef)
+                                                 buzzerURL, &soundID);
+                //play the sound
+                AudioServicesPlaySystemSound(soundID);
+                NSLog(@"playing buzzer sound");
+                
+                //dispose of the sound
+                AudioServicesDisposeSystemSoundID(soundID);
+                break;
+            }
+            
+            //**YOU ACTUALLY HAVE TO USE THE RIGHT IDENTIFIER OR ELSE IT MESSES WITH THE NUMERICAL OUTPUT!!
+            NSLog(@"Valid! intersection area: %f, intersection height: %f, width: %f", intersection.size.height * intersection.size.width, intersection.size.height, intersection.size.width);
             touched = true;
             
             //record corresponding number in corresponding index in placements array
@@ -135,7 +152,7 @@
     
     if (!touched) {
         //not touching
-        NSLog(@"NOT touching!");
+        NSLog(@"NOT valid!");
     }
 }
 
@@ -148,6 +165,21 @@
     sender.view.center = CGPointMake(sender.view.center.x + translation.x,
                                          sender.view.center.y + translation.y);
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        //create sound to play when pan begins
+        NSString *panBeganPath = [[NSBundle mainBundle] pathForResource:@"flagscore" ofType:@"wav"];
+        NSURL *panBeganURL = [NSURL fileURLWithPath:panBeganPath];
+        SystemSoundID soundID;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)
+                                         panBeganURL, &soundID);
+        //play the sound
+        AudioServicesPlaySystemSound(soundID);
+        NSLog(@"playing panBegan sound");
+        
+        //dispose of the sound
+        AudioServicesDisposeSystemSoundID(soundID);
+    }
     
     if (sender.state == UIGestureRecognizerStateEnded) {
         [self checkForIntersection];
@@ -302,7 +334,7 @@
         }
         
         //clear u's image on the grid
-        [u setImage:[UIImage imageNamed:@""]];
+        u.image = nil;
         
         //reset corresponding value in placements array
         [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:0]];
