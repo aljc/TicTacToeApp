@@ -8,10 +8,6 @@
 
 #import "ViewController.h"
 #define MIN_INTERSECTION_AREA 3000
-#define X_XPOS 16
-#define X_YPOS 547
-#define O_XPOS 259
-#define O_YPOS 547
 
 @interface ViewController ()
 
@@ -248,7 +244,6 @@
         b = [[_placements objectAtIndex:i+3] intValue];
         c = [[_placements objectAtIndex:i+6] intValue];
         if (a==b && a==c && a!=0) {
-            NSLog(@"2");
             return a;
         }
     }
