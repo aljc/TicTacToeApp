@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 #define MIN_INTERSECTION_AREA 3000
+#define X_XPOS 16
+#define X_YPOS 547
+#define O_XPOS 259
+#define O_YPOS 547
 
 @interface ViewController ()
 
@@ -86,8 +90,8 @@
                          completion:nil];
 
         
-        //if the rectangle that is the area of intersection is above a certain area size
-        if (overlap > MIN_INTERSECTION_AREA) {
+        //if the area of intersection is above a certain size and space is not occupied
+        if ((overlap > MIN_INTERSECTION_AREA) && ([[_placements objectAtIndex:i] intValue]==0)) {
             //touching!
             //**YOU ACTUALLY HAVE TO USE THE RIGHT IDENTIFIER OR ELSE IT MESSES WITH THE NUMERICAL OUTPUT!!
             NSLog(@"TOUCHING! intersection area: %f, intersection height: %f, width: %f", intersection.size.height * intersection.size.width, intersection.size.height, intersection.size.width);
@@ -97,19 +101,22 @@
             //record corresponding number in corresponding index in placements array
             [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:_currentPlayer]];
             
-            NSLog(@"current board: %lu %lu %lu %lu %lu %lu %lu %lu %lu", [[_placements objectAtIndex:0] integerValue], [[_placements objectAtIndex:1] integerValue], [[_placements objectAtIndex:2] integerValue], [[_placements objectAtIndex:3] integerValue], [[_placements objectAtIndex:4] integerValue], [[_placements objectAtIndex:5] integerValue], [[_placements objectAtIndex:6] integerValue], [[_placements objectAtIndex:7] integerValue], [[_placements objectAtIndex:8] integerValue]);
+//            NSLog(@"current board: %lu %lu %lu %lu %lu %lu %lu %lu %lu", [[_placements objectAtIndex:0] integerValue], [[_placements objectAtIndex:1] integerValue], [[_placements objectAtIndex:2] integerValue], [[_placements objectAtIndex:3] integerValue], [[_placements objectAtIndex:4] integerValue], [[_placements objectAtIndex:5] integerValue], [[_placements objectAtIndex:6] integerValue], [[_placements objectAtIndex:7] integerValue], [[_placements objectAtIndex:8] integerValue]);
             
             //draw x or o in that space
             [u setImage:player.image];
             
             int gameOver = [self gameOver];
-            if (gameOver > 0) {
+            if (gameOver != 0) {
                 NSString *msg = [[NSString alloc] init];
                 if (gameOver==1) {
                     msg = @"X wins!";
                 }
-                else {
+                else if (gameOver==2) {
                     msg = @"O wins!";
+                }
+                else {
+                    msg = @"No one wins.  Stalemate.";
                 }
                 
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over"
@@ -119,6 +126,7 @@
                                                       otherButtonTitles:nil];
 
                 [alert show];
+                [self reset];
             }
             else {
                 [self togglePlayer];
@@ -187,7 +195,7 @@
                          player.alpha = 1.0; //fade in the active player's piece
                          other.alpha = 0.5; //fade out the inactive player's piece
                          
-                         player.transform = CGAffineTransformMakeScale(1.5, 1.5); //make active player's piece grow
+                         player.transform = CGAffineTransformMakeScale(2, 2); //make active player's piece grow
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:1
@@ -197,7 +205,6 @@
                                           }];
                      }];
     
-    NSLog(@"turning touch back on");
     player.userInteractionEnabled = YES;
 }
 
@@ -217,7 +224,7 @@
     }
 }
 
-//return 0 if no winner yet, 1 if X has won, 2 if O has won
+//return 0 if no winner yet, 1 if X has won, 2 if O has won, and -1 if stalemate.
 - (int)gameOver {
     
     int a;
@@ -230,7 +237,6 @@
         a = [[_placements objectAtIndex:i] intValue];
         b = [[_placements objectAtIndex:i+1] intValue];
         c = [[_placements objectAtIndex:i+2] intValue];
-        NSLog(@"row: %d, %d, %d", a, b, c);
         if (a==b && a==c && a!=0) {
             return a;
         }
@@ -241,7 +247,6 @@
         a = [[_placements objectAtIndex:i] intValue];
         b = [[_placements objectAtIndex:i+3] intValue];
         c = [[_placements objectAtIndex:i+6] intValue];
-        NSLog(@"col: %d, %d, %d", a, b, c);
         if (a==b && a==c && a!=0) {
             NSLog(@"2");
             return a;
@@ -259,11 +264,59 @@
     b = [[_placements objectAtIndex:4] intValue];
     c = [[_placements objectAtIndex:6] intValue];
     if (a==b && a==c && a!=0){
-        NSLog(@"3");
         return a;
     }
     
-    return 0;
+    for (int i=0; i<9; i++) {
+        if ([[_placements objectAtIndex:i] intValue] == 0) //game is still going
+            return 0;
+    }
+    
+    return -1;
+}
+
+-(void) reset {
+    for (int i=0; i<9; i++) {
+        UIImageView *u = [self.imageArray objectAtIndex:i];
+        
+        int val = [[_placements objectAtIndex:i]intValue];
+        
+        if (val == 1 || val == 2) {
+            /* We will make a DEEP COPY of the UIImageView containing the X or O in this space.  We will animate this COPY back to the initial piece position,
+            and then remove the copy from the superview.  As for the actual UIImageView contained in the storyboard and imageArray itself,
+            it stays EXACTLY where it is - we will simply clear its image.  The reason is, if you animated THAT image view away, then you would no longer
+             have access to that image view and its position in future games. */
+            
+            //make deep copy of image view
+            UIImageView *copy = [[UIImageView alloc] initWithFrame:CGRectMake(u.frame.origin.x, u.frame.origin.y, 100, 100)];
+            [copy setImage:u.image];
+            [self.view addSubview:copy];
+            
+            //Animate: snap copy back to original position
+            [UIView animateWithDuration:1.0
+                             animations:^{
+                             if (val==1)
+                                 [copy setFrame:CGRectMake (16, 547, 100, 100)];
+                             else
+                                 [copy setFrame:CGRectMake(259, 547, 100, 100)];
+                                 
+                         }
+                         completion:^(BOOL finished) {
+                             [copy removeFromSuperview];
+                         }];
+        }
+        
+        //clear u's image on the grid
+        [u setImage:[UIImage imageNamed:@""]];
+        
+        //reset corresponding value in placements array
+        [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:0]];
+        
+        /* New game setup */
+        _currentPlayer = 1; //new game starts with X's turn
+        
+        [self makeMove]; //start new game
+    }
 }
 
 @end
