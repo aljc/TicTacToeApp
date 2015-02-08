@@ -59,6 +59,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)playSound:(NSString*)name ofType:(NSString*)type {
+    //create sound
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
+    NSURL *URL = [NSURL fileURLWithPath:path];
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)
+                                     URL, &soundID);
+    //play the sound
+    AudioServicesPlaySystemSound(soundID);
+    NSLog(@"playing %@ sound", name);
+    
+    //dispose of the sound
+    AudioServicesDisposeSystemSoundID(soundID);
+    
+    return;
+}
+
 - (void)checkForIntersection {
     XO* player = [self getCurrentPlayer];
     
@@ -92,18 +109,7 @@
             
             //if space is already occupied, play buzzer sound
             if ([[_placements objectAtIndex:i] intValue]!=0) {
-                //create sound to play when pan begins
-                NSString *buzzerPath = [[NSBundle mainBundle] pathForResource:@"buzzer" ofType:@"caf"];
-                NSURL *buzzerURL = [NSURL fileURLWithPath:buzzerPath];
-                SystemSoundID soundID;
-                AudioServicesCreateSystemSoundID((__bridge CFURLRef)
-                                                 buzzerURL, &soundID);
-                //play the sound
-                AudioServicesPlaySystemSound(soundID);
-                NSLog(@"playing buzzer sound");
-                
-                //dispose of the sound
-                AudioServicesDisposeSystemSoundID(soundID);
+                [self playSound:@"buzzer" ofType:@"caf"];
                 break;
             }
             
@@ -124,9 +130,11 @@
                 NSString *msg = [[NSString alloc] init];
                 if (gameOver==1) {
                     msg = @"X wins!";
+                    [self playSound:@"cheering" ofType:@"caf"];
                 }
                 else if (gameOver==2) {
                     msg = @"O wins!";
+                    [self playSound:@"cheering" ofType:@"caf"];
                 }
                 else {
                     msg = @"No one wins.  Stalemate.";
@@ -167,18 +175,7 @@
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
     
     if (sender.state == UIGestureRecognizerStateBegan) {
-        //create sound to play when pan begins
-        NSString *panBeganPath = [[NSBundle mainBundle] pathForResource:@"flagscore" ofType:@"wav"];
-        NSURL *panBeganURL = [NSURL fileURLWithPath:panBeganPath];
-        SystemSoundID soundID;
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)
-                                         panBeganURL, &soundID);
-        //play the sound
-        AudioServicesPlaySystemSound(soundID);
-        NSLog(@"playing panBegan sound");
-        
-        //dispose of the sound
-        AudioServicesDisposeSystemSoundID(soundID);
+        [self playSound:@"flagscore" ofType:@"wav"];
     }
     
     if (sender.state == UIGestureRecognizerStateEnded) {

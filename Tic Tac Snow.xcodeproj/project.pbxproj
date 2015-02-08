@@ -18,6 +18,7 @@
 		319A51571A8817CE00CF4F77 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319A51551A88177F00CF4F77 /* AudioToolbox.framework */; };
 		319A51591A88189600CF4F77 /* flagscore.wav in Resources */ = {isa = PBXBuildFile; fileRef = 319A51581A88189600CF4F77 /* flagscore.wav */; };
 		319A515B1A8828CF00CF4F77 /* buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 319A515A1A8828CF00CF4F77 /* buzzer.caf */; };
+		319A515D1A882B9300CF4F77 /* cheering.caf in Resources */ = {isa = PBXBuildFile; fileRef = 319A515C1A882B9300CF4F77 /* cheering.caf */; };
 		31B49AED1A83429200F9803F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEC1A83429200F9803F /* DetailViewController.m */; };
 		31B49AF01A83453200F9803F /* PresentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEF1A83453200F9803F /* PresentSegue.m */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		319A51551A88177F00CF4F77 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		319A51581A88189600CF4F77 /* flagscore.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flagscore.wav; sourceTree = "<group>"; };
 		319A515A1A8828CF00CF4F77 /* buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = buzzer.caf; sourceTree = "<group>"; };
+		319A515C1A882B9300CF4F77 /* cheering.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cheering.caf; sourceTree = "<group>"; };
 		31B49AEB1A83429200F9803F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		31B49AEC1A83429200F9803F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		31B49AEE1A83453200F9803F /* PresentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentSegue.h; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		318C4B931A82F62F0062B40E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				319A515C1A882B9300CF4F77 /* cheering.caf */,
 				319A515A1A8828CF00CF4F77 /* buzzer.caf */,
 				319A51581A88189600CF4F77 /* flagscore.wav */,
 				318C4B941A82F62F0062B40E /* Info.plist */,
@@ -227,6 +230,7 @@
 				318C4B9F1A82F6300062B40E /* Main.storyboard in Resources */,
 				319A515B1A8828CF00CF4F77 /* buzzer.caf in Resources */,
 				318C4BA41A82F6300062B40E /* LaunchScreen.xib in Resources */,
+				319A515D1A882B9300CF4F77 /* cheering.caf in Resources */,
 				318C4BA11A82F6300062B40E /* Images.xcassets in Resources */,
 				319A51591A88189600CF4F77 /* flagscore.wav in Resources */,
 			);
