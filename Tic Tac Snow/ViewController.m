@@ -11,10 +11,10 @@
 
 @interface ViewController ()
 
-@property NSInteger currentPlayer;
+@property int currentPlayer; //1 for x, 2 for o
 @property CGFloat originalX;
 @property CGFloat originalY;
-
+@property NSMutableArray* placements; //corresponds to piece placements; 0 = not occupied, 1 = occupied by x, 2 = occupied by o
 
 @end
 
@@ -27,9 +27,16 @@
     
     self.imageArray = [[NSMutableArray alloc] initWithCapacity:9];
     
+    //initialize imageArray
     //**REMEMBER: TAGS MUST BE GREATER THAN 100!
     for (int i=101; i<=109; i++) {
         [self.imageArray addObject:[self.view viewWithTag:i]];
+    }
+    
+    //initialize placements array
+    _placements = [[NSMutableArray alloc] initWithCapacity:9];
+    for (int i=0; i<9; i++) {
+        [_placements addObject:[NSNumber numberWithInt:0]];
     }
 
     //note: MUST do this programmatically!!! for some reason doesn't work when i add the pangesture in storyboard...
@@ -43,9 +50,7 @@
     //X gets the first move.
     _currentPlayer = 1;
     
-    while (![self gameOver]) {
-        [self makeMove];
-    }
+    [self makeMove];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,29 +68,62 @@
     Boolean touched = false;
     
     //after pan ended...
-    for (UIImageView *u in self.imageArray) {
+    for (int i=0; i<9; i++) {
+        UIImageView *u = [self.imageArray objectAtIndex:i];
+        
         //the space on the grid you are currently checking
         CGRect imageFrame = [u frame];
         
         //intersection between the piece's drop position and current grid space
         CGRect intersection = CGRectIntersection(playerFrame, imageFrame);
-        NSInteger overlap = intersection.size.height * intersection.size.width;
+        int overlap = intersection.size.height * intersection.size.width;
+        
+        //snap back to original position
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             [player setFrame:CGRectMake (_originalX, _originalY, 100, 100)];
+                         }
+                         completion:nil];
+
         
         //if the rectangle that is the area of intersection is above a certain area size
         if (overlap > MIN_INTERSECTION_AREA) {
             //touching!
             //**YOU ACTUALLY HAVE TO USE THE RIGHT IDENTIFIER OR ELSE IT MESSES WITH THE NUMERICAL OUTPUT!!
             NSLog(@"TOUCHING! intersection area: %f, intersection height: %f, width: %f", intersection.size.height * intersection.size.width, intersection.size.height, intersection.size.width);
+            
             touched = true;
-            [UIView animateWithDuration:0.2
-                             animations:^{
-                                 //snap to center of space
-                                 [player setFrame:CGRectMake (imageFrame.origin.x, imageFrame.origin.y, 100, 100)];
-                             }
-                             completion:^(BOOL finished) {
-                                 [self togglePlayer];
-                                 [self makeMove];
-                             }];
+            
+            //record corresponding number in corresponding index in placements array
+            [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:_currentPlayer]];
+            
+            NSLog(@"current board: %lu %lu %lu %lu %lu %lu %lu %lu %lu", [[_placements objectAtIndex:0] integerValue], [[_placements objectAtIndex:1] integerValue], [[_placements objectAtIndex:2] integerValue], [[_placements objectAtIndex:3] integerValue], [[_placements objectAtIndex:4] integerValue], [[_placements objectAtIndex:5] integerValue], [[_placements objectAtIndex:6] integerValue], [[_placements objectAtIndex:7] integerValue], [[_placements objectAtIndex:8] integerValue]);
+            
+            //draw x or o in that space
+            [u setImage:player.image];
+            
+            int gameOver = [self gameOver];
+            if (gameOver > 0) {
+                NSString *msg = [[NSString alloc] init];
+                if (gameOver==1) {
+                    msg = @"X wins!";
+                }
+                else {
+                    msg = @"O wins!";
+                }
+                
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over"
+                                                                message:msg
+                                                               delegate:self
+                                                      cancelButtonTitle:@"New game"
+                                                      otherButtonTitles:nil];
+
+                [alert show];
+            }
+            else {
+                [self togglePlayer];
+                [self makeMove];
+            }
             
             break;
         }
@@ -94,12 +132,6 @@
     if (!touched) {
         //not touching
         NSLog(@"NOT touching!");
-        [UIView animateWithDuration:1.0
-                         animations:^{
-                             //snap back to original position if not on a valid space
-                             [player setFrame:CGRectMake (_originalX, _originalY, 100, 100)];
-                         }
-                         completion:nil];
     }
 }
 
@@ -165,6 +197,7 @@
                                           }];
                      }];
     
+    NSLog(@"turning touch back on");
     player.userInteractionEnabled = YES;
 }
 
@@ -177,16 +210,61 @@
 - (void)togglePlayer {
     
     if (_currentPlayer == 1) {
-        _currentPlayer = 0;
+        _currentPlayer = 2;
     }
     else {
         _currentPlayer = 1;
     }
 }
 
-- (bool)gameOver {
-    //if 3 in a row, then game over
-    return true;
+//return 0 if no winner yet, 1 if X has won, 2 if O has won
+- (int)gameOver {
+    
+    int a;
+    int b;
+    int c;
+    
+    //check for row victory
+    for (int i=0; i<9; i+=3) {
+        
+        a = [[_placements objectAtIndex:i] intValue];
+        b = [[_placements objectAtIndex:i+1] intValue];
+        c = [[_placements objectAtIndex:i+2] intValue];
+        NSLog(@"row: %d, %d, %d", a, b, c);
+        if (a==b && a==c && a!=0) {
+            return a;
+        }
+    }
+    
+    //check for column victory
+    for (int i=0; i<3; i++) {
+        a = [[_placements objectAtIndex:i] intValue];
+        b = [[_placements objectAtIndex:i+3] intValue];
+        c = [[_placements objectAtIndex:i+6] intValue];
+        NSLog(@"col: %d, %d, %d", a, b, c);
+        if (a==b && a==c && a!=0) {
+            NSLog(@"2");
+            return a;
+        }
+    }
+    
+    //check for diagonal victory
+    a = [[_placements objectAtIndex:0] intValue];
+    b = [[_placements objectAtIndex:4] intValue];
+    c = [[_placements objectAtIndex:8] intValue];
+    if (a==b && a==c && a!=0)
+        return a;
+    
+    a = [[_placements objectAtIndex:2] intValue];
+    b = [[_placements objectAtIndex:4] intValue];
+    c = [[_placements objectAtIndex:6] intValue];
+    if (a==b && a==c && a!=0){
+        NSLog(@"3");
+        return a;
+    }
+    
+    return 0;
 }
 
 @end
+
