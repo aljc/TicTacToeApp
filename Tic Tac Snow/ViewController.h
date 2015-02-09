@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet XO *x;
 @property (weak, nonatomic) IBOutlet XO *o;
 - (IBAction)handlePan:(UIPanGestureRecognizer *)sender;
+- (IBAction)presentInfo:(UIButton *)sender;
+- (IBAction)dismissInfo:(UIButton *)sender;
 
 @end
 

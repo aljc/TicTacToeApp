@@ -18,21 +18,21 @@
     NSLog(@"Perform");
     // Add your own animation code here.
     
-    UIViewController *sourceViewController = (UIViewController*)[self sourceViewController];
-    UIViewController *destinationController = (UIViewController*)[self destinationViewController];
-    
-    CATransition* transition = [CATransition animation];
-    transition.duration = .25;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-    transition.subtype = kCATransitionFromLeft; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
-    
-    
-    
-    [sourceViewController.navigationController.view.layer addAnimation:transition
-                                                                forKey:kCATransition];
-    
-    [[self sourceViewController] presentModalViewController:[self destinationViewController] animated:NO];
+//    UIViewController *sourceViewController = (UIViewController*)[self sourceViewController];
+//    UIViewController *destinationController = (UIViewController*)[self destinationViewController];
+//    
+//    CATransition* transition = [CATransition animation];
+//    transition.duration = .25;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    transition.type = kCATransitionPush; //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
+//    transition.subtype = kCATransitionFromLeft; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+//    
+//    
+//    
+//    [sourceViewController.navigationController.view.layer addAnimation:transition
+//                                                                forKey:kCATransition];
+//    
+//    [[self sourceViewController] presentModalViewController:[self destinationViewController] animated:NO];
 }
 
 @end

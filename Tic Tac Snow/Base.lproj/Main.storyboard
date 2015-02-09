@@ -32,7 +32,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="V9r-JX-g1H" kind="custom" customClass="PresentSegue" id="p5b-P5-iOt"/>
+                                    <action selector="presentInfo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tmV-oo-bJx"/>
                                 </connections>
                             </button>
                             <imageView tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LlI-g6-sNE">
@@ -69,6 +69,40 @@
                                     <outletCollection property="gestureRecognizers" destination="l0h-5y-qS5" appends="YES" id="daz-md-gcs"/>
                                 </connections>
                             </imageView>
+                            <view hidden="YES" tag="110" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVC-nE-G07" customClass="Info">
+                                <rect key="frame" x="69" y="61" width="230" height="400"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kol-MX-U1M">
+                                        <rect key="frame" x="17" y="10" width="188" height="267"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.040183829110187474" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">RULES:
+
+1. X moves first.
+2. A piece may be placed on any empty space.
+3. A player wins by being the first to connect a line of friendly pieces from one side or corner of the board to the other.
+4. The game ends when either one player wins or it is no longer possible for a player to win (in which case the result is a draw).</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="13" name="Arial-ItalicMT"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsd-Eb-ANv">
+                                        <rect key="frame" x="63" y="325" width="97" height="30"/>
+                                        <state key="normal" title="Let's play!">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dismissInfo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bBz-gR-YOc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.50769756390255993" blue="0.68245934021291665" alpha="0.79000000000000004" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -93,55 +127,6 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="340.5" y="576.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="SnD-0j-xJ2">
-            <objects>
-                <viewController id="V9r-JX-g1H" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="D8n-kE-VYJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="bHN-Nd-2R7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rHg-xs-02u">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tic Tac Snow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWM-hh-b4V">
-                                <rect key="frame" x="108" y="20" width="159" height="52"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYd-If-CU8">
-                                <rect key="frame" x="67" y="199" width="240" height="250"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">RULES:
-1. X moves first.
-2. A piece may be placed on any empty space.
-3. A player wins by being the first to connect a line of friendly pieces from one side or corner of the board to the other.
-4. The game ends when either one player wins or it is no longer possible for a player to win (in which case the result is a draw).</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AaV-Bq-RVp">
-                                <rect key="frame" x="84" y="457" width="206" height="30"/>
-                                <state key="normal" title="I understand, now let's play!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="custom" customClass="DismissSegue" id="tsg-FJ-0tH"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="pf0-Kx-ajT"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o6F-hO-FxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1027.5" y="479.5"/>
         </scene>
     </scenes>
     <resources>

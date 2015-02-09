@@ -20,10 +20,7 @@
 		319A515B1A8828CF00CF4F77 /* buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 319A515A1A8828CF00CF4F77 /* buzzer.caf */; };
 		319A515D1A882B9300CF4F77 /* cheering.caf in Resources */ = {isa = PBXBuildFile; fileRef = 319A515C1A882B9300CF4F77 /* cheering.caf */; };
 		319A515F1A882F5000CF4F77 /* ping.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 319A515E1A882F5000CF4F77 /* ping.aiff */; };
-		319A51621A88315A00CF4F77 /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 319A51611A88315A00CF4F77 /* DismissSegue.m */; };
-		319A51651A88332A00CF4F77 /* DrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 319A51641A88332A00CF4F77 /* DrawLine.m */; };
-		31B49AED1A83429200F9803F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEC1A83429200F9803F /* DetailViewController.m */; };
-		31B49AF01A83453200F9803F /* PresentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B49AEF1A83453200F9803F /* PresentSegue.m */; };
+		319A51681A88773100CF4F77 /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 319A51671A88773100CF4F77 /* Info.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,14 +54,8 @@
 		319A515A1A8828CF00CF4F77 /* buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = buzzer.caf; sourceTree = "<group>"; };
 		319A515C1A882B9300CF4F77 /* cheering.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cheering.caf; sourceTree = "<group>"; };
 		319A515E1A882F5000CF4F77 /* ping.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ping.aiff; sourceTree = "<group>"; };
-		319A51601A88315A00CF4F77 /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
-		319A51611A88315A00CF4F77 /* DismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissSegue.m; sourceTree = "<group>"; };
-		319A51631A88332A00CF4F77 /* DrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawLine.h; sourceTree = "<group>"; };
-		319A51641A88332A00CF4F77 /* DrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawLine.m; sourceTree = "<group>"; };
-		31B49AEB1A83429200F9803F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		31B49AEC1A83429200F9803F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		31B49AEE1A83453200F9803F /* PresentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentSegue.h; sourceTree = "<group>"; };
-		31B49AEF1A83453200F9803F /* PresentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentSegue.m; sourceTree = "<group>"; };
+		319A51661A88773100CF4F77 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
+		319A51671A88773100CF4F77 /* Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Info.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,19 +101,13 @@
 			children = (
 				318C4B971A82F6300062B40E /* AppDelegate.h */,
 				318C4B981A82F6300062B40E /* AppDelegate.m */,
+				319A51661A88773100CF4F77 /* Info.h */,
+				319A51671A88773100CF4F77 /* Info.m */,
 				318C4B9A1A82F6300062B40E /* ViewController.h */,
 				318C4B9B1A82F6300062B40E /* ViewController.m */,
-				319A51631A88332A00CF4F77 /* DrawLine.h */,
-				319A51641A88332A00CF4F77 /* DrawLine.m */,
 				318C4BB91A8316D10062B40E /* XO.h */,
 				318C4BBA1A8316D10062B40E /* XO.m */,
 				318C4B9D1A82F6300062B40E /* Main.storyboard */,
-				31B49AEB1A83429200F9803F /* DetailViewController.h */,
-				31B49AEC1A83429200F9803F /* DetailViewController.m */,
-				31B49AEE1A83453200F9803F /* PresentSegue.h */,
-				31B49AEF1A83453200F9803F /* PresentSegue.m */,
-				319A51601A88315A00CF4F77 /* DismissSegue.h */,
-				319A51611A88315A00CF4F77 /* DismissSegue.m */,
 				318C4BA01A82F6300062B40E /* Images.xcassets */,
 				318C4BA21A82F6300062B40E /* LaunchScreen.xib */,
 				318C4B931A82F62F0062B40E /* Supporting Files */,
@@ -264,12 +249,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				319A51621A88315A00CF4F77 /* DismissSegue.m in Sources */,
-				31B49AED1A83429200F9803F /* DetailViewController.m in Sources */,
 				318C4B9C1A82F6300062B40E /* ViewController.m in Sources */,
-				319A51651A88332A00CF4F77 /* DrawLine.m in Sources */,
 				318C4B991A82F6300062B40E /* AppDelegate.m in Sources */,
-				31B49AF01A83453200F9803F /* PresentSegue.m in Sources */,
+				319A51681A88773100CF4F77 /* Info.m in Sources */,
 				318C4BBB1A8316D10062B40E /* XO.m in Sources */,
 				318C4B961A82F62F0062B40E /* main.m in Sources */,
 			);

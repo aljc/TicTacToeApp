@@ -189,6 +189,38 @@
     }
   }
 
+- (IBAction)presentInfo:(UIButton *)sender {
+    int x = self.view.bounds.size.width/2-110;
+    
+    UIView *info = [self.view viewWithTag:110];
+
+    //move info offscreen before making it visible
+    [info setFrame:CGRectMake(x, -500, 230, 400)];
+    info.hidden = NO;
+    
+    //fall-down animation
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         [info setFrame:CGRectMake(x, 100, 230, 400)];
+                     }
+                     completion:nil];
+}
+
+- (IBAction)dismissInfo:(UIButton *)sender {
+    int x = self.view.bounds.size.width/2-110;
+    
+    UIView *info = [self.view viewWithTag:110];
+    
+    //fall-out animation
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         [info setFrame:CGRectMake(x, 1000, 230, 400)];
+                     }
+                     completion:^(BOOL completed) {
+                         info.hidden=YES;
+                     }];
+}
+
 - (XO*)getCurrentPlayer {
     if (_currentPlayer == 1) {
         return self.x;
@@ -221,20 +253,20 @@
     self.x.userInteractionEnabled = NO;
     self.o.userInteractionEnabled = NO;
 
-//    [UIView animateWithDuration:0.5 delay:0.5 options: UIViewAnimationOptionTransitionCrossDissolve
-//                     animations:^{
-//                         player.alpha = 1.0; //fade in the active player's piece
-//                         other.alpha = 0.5; //fade out the inactive player's piece
-//                         
-//                         player.transform = CGAffineTransformMakeScale(2, 2); //make active player's piece grow
-//                     }
-//                     completion:^(BOOL finished) {
-//                         [UIView animateWithDuration:1
-//                                          animations:^{
-//                                              player.transform = CGAffineTransformIdentity; //make active player's piece shrink back to normal size
-//                                              
-//                                          }];
-//                     }];
+    [UIView animateWithDuration:0.5 delay:0.5 options: UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+                         player.alpha = 1.0; //fade in the active player's piece
+                         other.alpha = 0.5; //fade out the inactive player's piece
+                         
+                         player.transform = CGAffineTransformMakeScale(2, 2); //make active player's piece grow
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:1
+                                          animations:^{
+                                              player.transform = CGAffineTransformIdentity; //make active player's piece shrink back to normal size
+                                              
+                                          }];
+                     }];
     
     player.userInteractionEnabled = YES;
 }
