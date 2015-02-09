@@ -69,7 +69,7 @@
                                     <outletCollection property="gestureRecognizers" destination="l0h-5y-qS5" appends="YES" id="daz-md-gcs"/>
                                 </connections>
                             </imageView>
-                            <view hidden="YES" tag="110" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVC-nE-G07" customClass="Info">
+                            <view hidden="YES" tag="110" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVC-nE-G07">
                                 <rect key="frame" x="69" y="61" width="230" height="400"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kol-MX-U1M">

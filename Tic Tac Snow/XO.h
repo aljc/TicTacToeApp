@@ -10,4 +10,5 @@
 
 @interface XO : UIImageView
 
+@property int weight;
 @end

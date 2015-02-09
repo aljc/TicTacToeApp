@@ -40,8 +40,11 @@
     for (int i=0; i<9; i++) {
         [_placements addObject:[NSNumber numberWithInt:0]];
     }
+    
+    [self.x setWeight:1];
+    [self.o setWeight:2];
 
-    //note: MUST do this programmatically!!! for some reason doesn't work when i add the pangesture in storyboard...
+    //programatically add pan gesture recognizer to x and o
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [panGesture setMinimumNumberOfTouches:1];
     [panGesture setMaximumNumberOfTouches:1];
@@ -121,7 +124,7 @@
             [self playSound:@"ping" ofType:@"aiff"];
             
             //record corresponding number in corresponding index in placements array
-            [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:_currentPlayer]];
+            [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:player.weight]];
 
             //draw x or o in that space
             [u setImage:player.image];
