@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XO.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *gridView;
 @property NSMutableArray *imageArray;

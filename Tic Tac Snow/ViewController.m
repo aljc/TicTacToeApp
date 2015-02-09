@@ -16,6 +16,7 @@
 @property CGFloat originalX;
 @property CGFloat originalY;
 @property NSMutableArray* placements; //corresponds to piece placements; 0 = not occupied, 1 = occupied by x, 2 = occupied by o
+@property UIView* lineView;
 
 @end
 
@@ -117,11 +118,11 @@
             NSLog(@"Valid! intersection area: %f, intersection height: %f, width: %f", intersection.size.height * intersection.size.width, intersection.size.height, intersection.size.width);
             touched = true;
             
+            [self playSound:@"ping" ofType:@"aiff"];
+            
             //record corresponding number in corresponding index in placements array
             [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:_currentPlayer]];
-            
-//            NSLog(@"current board: %lu %lu %lu %lu %lu %lu %lu %lu %lu", [[_placements objectAtIndex:0] integerValue], [[_placements objectAtIndex:1] integerValue], [[_placements objectAtIndex:2] integerValue], [[_placements objectAtIndex:3] integerValue], [[_placements objectAtIndex:4] integerValue], [[_placements objectAtIndex:5] integerValue], [[_placements objectAtIndex:6] integerValue], [[_placements objectAtIndex:7] integerValue], [[_placements objectAtIndex:8] integerValue]);
-            
+
             //draw x or o in that space
             [u setImage:player.image];
             
@@ -145,9 +146,8 @@
                                                                delegate:self
                                                       cancelButtonTitle:@"New game"
                                                       otherButtonTitles:nil];
-
                 [alert show];
-                [self reset];
+                
             }
             else {
                 [self togglePlayer];
@@ -162,6 +162,12 @@
         //not touching
         NSLog(@"NOT valid!");
     }
+}
+
+//Implemented UIAlertViewDelegate in order to be able to BLOCK until UIAlertView is dismissed!
+//NOTE: Without this protocol, UIAlertView will NOT block or wait for button tap!
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex  {
+    [self reset];
 }
 
 //Source: http://www.raywenderlich.com/6567/uigesturerecognizer-tutorial-in-ios-5-pinches-pans-and-more
@@ -215,20 +221,20 @@
     self.x.userInteractionEnabled = NO;
     self.o.userInteractionEnabled = NO;
 
-    [UIView animateWithDuration:0.5 delay:0.5 options: UIViewAnimationOptionTransitionCrossDissolve
-                     animations:^{
-                         player.alpha = 1.0; //fade in the active player's piece
-                         other.alpha = 0.5; //fade out the inactive player's piece
-                         
-                         player.transform = CGAffineTransformMakeScale(2, 2); //make active player's piece grow
-                     }
-                     completion:^(BOOL finished) {
-                         [UIView animateWithDuration:1
-                                          animations:^{
-                                              player.transform = CGAffineTransformIdentity; //make active player's piece shrink back to normal size
-                                              
-                                          }];
-                     }];
+//    [UIView animateWithDuration:0.5 delay:0.5 options: UIViewAnimationOptionTransitionCrossDissolve
+//                     animations:^{
+//                         player.alpha = 1.0; //fade in the active player's piece
+//                         other.alpha = 0.5; //fade out the inactive player's piece
+//                         
+//                         player.transform = CGAffineTransformMakeScale(2, 2); //make active player's piece grow
+//                     }
+//                     completion:^(BOOL finished) {
+//                         [UIView animateWithDuration:1
+//                                          animations:^{
+//                                              player.transform = CGAffineTransformIdentity; //make active player's piece shrink back to normal size
+//                                              
+//                                          }];
+//                     }];
     
     player.userInteractionEnabled = YES;
 }
@@ -249,6 +255,37 @@
     }
 }
 
+- (void)drawLine:(UIImageView*)begin withType:(NSString*)type {
+    CGFloat x1 = begin.frame.origin.x;
+    CGFloat y1 = begin.frame.origin.y;
+    CGFloat radians;
+    
+    if ([type isEqualToString:@"row"]) {
+        radians = 0;
+        y1+=50;
+    }
+    else if ([type isEqualToString:@"col"]) {
+        radians = -1.571;
+        x1-=110;
+        y1+=155;
+    }
+    else if ([type isEqualToString:@"diag1"]) {
+        radians = 0.785;
+        y1+=155;
+    }
+    else {
+        radians = -0.785;
+        y1-=65;
+    }
+    
+    _lineView = [[UIView alloc] initWithFrame:CGRectMake(x1, y1, 330, 4)];
+    _lineView.backgroundColor = [UIColor purpleColor];
+    _lineView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians);
+    [self.view addSubview:_lineView];
+    
+    return;
+}
+
 //return 0 if no winner yet, 1 if X has won, 2 if O has won, and -1 if stalemate.
 - (int)gameOver {
     
@@ -263,6 +300,7 @@
         b = [[_placements objectAtIndex:i+1] intValue];
         c = [[_placements objectAtIndex:i+2] intValue];
         if (a==b && a==c && a!=0) {
+            [self drawLine:[self.imageArray objectAtIndex:i] withType:@"row"];
             return a;
         }
     }
@@ -273,6 +311,7 @@
         b = [[_placements objectAtIndex:i+3] intValue];
         c = [[_placements objectAtIndex:i+6] intValue];
         if (a==b && a==c && a!=0) {
+            [self drawLine:[self.imageArray objectAtIndex:i] withType:@"col"];
             return a;
         }
     }
@@ -281,13 +320,16 @@
     a = [[_placements objectAtIndex:0] intValue];
     b = [[_placements objectAtIndex:4] intValue];
     c = [[_placements objectAtIndex:8] intValue];
-    if (a==b && a==c && a!=0)
+    if (a==b && a==c && a!=0) {
+        [self drawLine:[self.imageArray objectAtIndex:0] withType:@"diag1"];
         return a;
+    }
     
     a = [[_placements objectAtIndex:2] intValue];
     b = [[_placements objectAtIndex:4] intValue];
     c = [[_placements objectAtIndex:6] intValue];
     if (a==b && a==c && a!=0){
+        [self drawLine:[self.imageArray objectAtIndex:6] withType:@"diag2"];
         return a;
     }
     
@@ -335,12 +377,14 @@
         
         //reset corresponding value in placements array
         [_placements replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:0]];
-        
-        /* New game setup */
-        _currentPlayer = 1; //new game starts with X's turn
-        
-        [self makeMove]; //start new game
     }
+    /* remove line from view */
+    [_lineView removeFromSuperview];
+    
+    /* New game setup */
+    _currentPlayer = 1; //new game starts with X's turn
+    
+    [self makeMove]; //start new game
 }
 
 @end

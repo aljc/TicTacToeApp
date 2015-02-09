@@ -32,7 +32,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="6GE-46-uGv" kind="custom" customClass="PresentSegue" id="zeO-JN-zEZ"/>
+                                    <segue destination="V9r-JX-g1H" kind="custom" customClass="PresentSegue" id="p5b-P5-iOt"/>
                                 </connections>
                             </button>
                             <imageView tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LlI-g6-sNE">
@@ -81,14 +81,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="EKD-Nj-noe">
-                    <connections>
-                        <action selector="handlePan:" destination="vXZ-lx-hvc" id="C91-M1-bIk"/>
-                    </connections>
-                </panGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="l0h-5y-qS5">
                     <connections>
                         <action selector="handlePan:" destination="vXZ-lx-hvc" id="nw1-Se-mnT"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="EKD-Nj-noe">
+                    <connections>
+                        <action selector="handlePan:" destination="vXZ-lx-hvc" id="C91-M1-bIk"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
@@ -123,6 +123,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AaV-Bq-RVp">
+                                <rect key="frame" x="84" y="457" width="206" height="30"/>
+                                <state key="normal" title="I understand, now let's play!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="custom" customClass="DismissSegue" id="tsg-FJ-0tH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -132,25 +141,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6F-hO-FxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756.5" y="563.5"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="L7z-0m-l46">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6GE-46-uGv" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ctZ-jt-vco">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="V9r-JX-g1H" kind="relationship" relationship="rootViewController" id="L0g-om-6cp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uju-Ng-xJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="944" y="563"/>
+            <point key="canvasLocation" x="1027.5" y="479.5"/>
         </scene>
     </scenes>
     <resources>
